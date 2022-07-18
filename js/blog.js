@@ -1,7 +1,6 @@
 "use strict";
 
 window.addEventListener("DOMContentLoaded", () => {
-
     //*<Post hover>=================================================================================================
 
     const postsTitles = document.querySelectorAll(".post__title"),
@@ -37,7 +36,10 @@ window.addEventListener("DOMContentLoaded", () => {
     if (window.screen.width > 1200) {
         const linksWithSubMenu = document.querySelectorAll("[data-submenus]"),
             subMenuLists = document.querySelectorAll(".sub-menu__list"),
-            menuArrow = document.querySelectorAll(".menu__arrow");
+            menuArrow = document.querySelectorAll(".menu__arrow"),
+            menuDotts = document.querySelector(".more__dotts"),
+            moreList = document.querySelector(".more__list");
+
         linksWithSubMenu.forEach((item, i) => {
             item.addEventListener("click", (e) => {
                 e.preventDefault();
@@ -46,6 +48,21 @@ window.addEventListener("DOMContentLoaded", () => {
                 }
                 item.classList.toggle("open");
                 subMenuLists[i].classList.toggle("open");
+                if (menuDotts.classList.contains("open")) {
+                    menuDotts.classList.remove("open");
+                    moreList.classList.remove("open");
+                }
+                if (item.classList.contains("open")) {
+                    linksWithSubMenu.forEach((link, i) => {
+                        if (link != item) {
+                            if (link.classList.contains("open") && !item.classList.contains("menu__more")) {
+                                link.classList.remove("open");
+                                subMenuLists[i].classList.remove("open");
+                                menuArrow[i].classList.toggle("open");
+                            }
+                        }
+                    });
+                }
             });
         });
     }
@@ -55,11 +72,19 @@ window.addEventListener("DOMContentLoaded", () => {
     //*<More>=================================================================================================
 
     const menuDotts = document.querySelector(".more__dotts"),
-        moreList = document.querySelector(".more__list");
+        moreList = document.querySelector(".more__list"),
+        linksWithSubMenu = document.querySelectorAll("[data-submenus]"),
+        subMenuLists = document.querySelectorAll(".sub-menu__list"),
+        menuArrow = document.querySelectorAll(".menu__arrow");
 
     menuDotts.addEventListener("click", (e) => {
         e.target.classList.toggle("open");
         moreList.classList.toggle("open");
+        linksWithSubMenu.forEach((item, i) => {
+            item.classList.remove("open");
+            menuArrow[i].classList.remove("open");
+            subMenuLists[i].classList.remove("open");
+        });
     });
 
     //*</More>=================================================================================================
