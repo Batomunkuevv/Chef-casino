@@ -1,6 +1,7 @@
 "use strict";
 
 window.addEventListener("DOMContentLoaded", () => {
+
     //*<Post hover>=================================================================================================
 
     const postsTitles = document.querySelectorAll(".post__title"),

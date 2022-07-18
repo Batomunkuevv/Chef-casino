@@ -1,6 +1,8 @@
 "use strict";
 
 window.addEventListener("DOMContentLoaded", () => {
+
+
     //*<Language Sub list>=================================================================================================
 
     const languageChosen = document.querySelector(".language__chosen"),
