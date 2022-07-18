@@ -1,7 +1,19 @@
 "use strict";
 
 window.addEventListener("DOMContentLoaded", () => {
+    //*<Fixed sidebar>=================================================================================================
 
+    const sidebarFixed = document.querySelector(".top5-sidebar");
+
+    window.addEventListener("scroll", (e) => {
+        if (document.documentElement.scrollTop >= 1300 && document.documentElement.scrollTop < 17400) {
+            sidebarFixed.classList.add("top5-sidebar_fixed");
+        } else {
+            sidebarFixed.classList.remove("top5-sidebar_fixed");
+        }
+    });
+
+    //*</Fixed sidebar>=================================================================================================
 
     //*<Language Sub list>=================================================================================================
 
@@ -23,6 +35,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const linksWithSubMenu = document.querySelectorAll("[data-submenus]"),
             subMenuLists = document.querySelectorAll(".sub-menu__list"),
             menuArrow = document.querySelectorAll(".menu__arrow");
+
         linksWithSubMenu.forEach((item, i) => {
             item.addEventListener("click", (e) => {
                 e.preventDefault();
